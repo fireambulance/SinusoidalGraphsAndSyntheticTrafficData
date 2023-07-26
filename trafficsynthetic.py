@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 # Define the range of traffic volume (e.g., low, moderate, high)
 low_volume = np.random.randint(50, 200, size=300)  # Random values between 50 and 200
@@ -41,6 +42,27 @@ def simulate_congestion_evolution(traffic_volume, speed, num_time_steps, distanc
 # Simulate congestion dynamics over 100 time steps
 num_time_steps = 100
 congestion_evolution = simulate_congestion_evolution(congestion_data, speed_data, num_time_steps, distance)
+
+# Calculate travel time using the formula: travel_time = distance / speed
+travel_time_data = distance / synthetic_speed_data
+
+# Create a 3D plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot the 3D scatter plot
+ax.scatter(synthetic_speed_data, traffic_volume_data, travel_time_data, c=travel_time_data, cmap='viridis')
+
+# Set axis labels
+ax.set_xlabel('Speed (km/h)')
+ax.set_ylabel('Traffic Volume')
+ax.set_zlabel('Travel Time (hours)')
+
+# Set the title
+ax.set_title('Speed vs Traffic Volume vs Travel Time')
+
+# Show the plot
+plt.show()
 
 # Plot the results
 plt.figure(figsize=(10, 6))
